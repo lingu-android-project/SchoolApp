@@ -98,6 +98,8 @@ public class LoginActivity extends AppCompatActivity {
                                             .setAction("Action", null).show();
                                 }
                             } catch (JSONException e) {
+                                Snackbar.make(view, "Invalid Username or Password!", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
                                 e.printStackTrace();
                             }
 

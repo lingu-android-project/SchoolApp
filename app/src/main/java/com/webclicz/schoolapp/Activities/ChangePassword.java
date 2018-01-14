@@ -50,10 +50,33 @@ public class ChangePassword extends AppCompatActivity {
         new_password = (EditText) findViewById(R.id.new_password);
         etype_password = (EditText) findViewById(R.id.etype_password);
         changePasswordBtn = (Button) findViewById(R.id.changePasswordBtn);
+        
+        String userType = session.getUserType();
+        String userId = null;
+        if(userType.equalsIgnoreCase(constants.PARENT)){
+            currentLoggedin = session.getSessionParentDetails();
+            try {
+                userId = currentLoggedin.getString(constants.PARENT_ID);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else if(userType.equalsIgnoreCase(constants.STAFF)){
+            currentLoggedin = session.getSessionStaffDetails();
+            try {
+                userId = currentLoggedin.getString(constants.STAFF_ID);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }else if(userType.equalsIgnoreCase(constants.STUDENT)){
+            currentLoggedin = session.getSessionStaffDetails();
+            try {
+                userId = currentLoggedin.getString(constants.STAFF_ID);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
-        currentLoggedin = session.getSessionParentDetails();
-        Log.e("currentStudent", String.valueOf(currentLoggedin));
-
+        final String finalUserId = userId;
         changePasswordBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
@@ -67,7 +90,7 @@ public class ChangePassword extends AppCompatActivity {
                         try {
                             input.put(constants.SCHOOL_ID, currentLoggedin.getString(constants.SCHOOL_ID));
                             input.put(constants.USER_TYPE, currentLoggedin.getString(constants.USER_TYPE));
-                            input.put("UserID", currentLoggedin.getString(constants.PARENT_ID));
+                            input.put("UserID", finalUserId);
                             input.put(constants.CURRENT_PASSWORD, oldPassword);
                             input.put(constants.NEW_PASSWORD, newPassword);
                             final JSONObject data = new JSONObject(input);

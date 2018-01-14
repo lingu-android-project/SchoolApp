@@ -22,6 +22,12 @@ public class Constants {
     public String API_CHANGE_PASSWORD = BASE_URL + "changePassword.php";
     public String API_TIME_TABLE = BASE_URL + "getStudentTimetable.php";
     public String API_STAFF_TIME_TABLE = BASE_URL + "getStaffTimetable.php";
+    public String API_SESSION = BASE_URL + "getAttTypeOption.php";
+    public String API_CLASS_DIVISION = BASE_URL + "getStaffAttClassDivision.php";
+    public String API_ATTENDANCE_SUMMARY = BASE_URL + "getStaffAttStudentList.php";
+    public String API_ATTENDANCE_SAVE = BASE_URL + "saveStaffAttStudentAttendance.php";
+    public String API_SCHOOL_DETAILS = BASE_URL + "getSchoolDetail.php";
+    public String API_FAQ = BASE_URL + "getFAQDetail.php";
     public String AVTAR_IMAGE = "http://www.newsshare.in/wp-content/uploads/2017/04/Miniclip-8-Ball-Pool-Avatar-11.png";
 
     //API REQUEST KEYWORDS
@@ -92,5 +98,13 @@ public class Constants {
     public String NEW_PASSWORD = "NewPassword";
 
     public String STAFF_ID = "StaffID";
+    public String EMP_ID = "EmployeeID";
+    public String DESIGNATION = "Designation";
+    public String ADDRESS = "Address";
+    public String CELL_PHONE = "CellPhone";
     public String STAFF_NAME = "StaffName";
+    public String EMAIL = "Email";
+    public String CLASS_DIVISION_ID = "ClassDivisionID";
+    public String ATTENDANCE_DATE = "AttendanceDate";
+    public String SESSION_ID = "SessionID";
 }

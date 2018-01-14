@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SchoolApp</string>
+    <string name="app_name">Skool Infos</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -9,15 +9,21 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="take_attendance">Mark Attendance</string>
+    <string name="attendance_summary">Attendance Summary</string>
 
     <string name="name">Name</string>
     <string name="className">Class</string>
     <string name="section">Section</string>
+    <string name="search">Search</string>
+    <string name="setAbsent">Submit</string>
     <string name="mobile_number">Mobile No.</string>
     <string name="father_number">Father Mobile No.</string>
     <string name="mother_number">Mother Mobile No.</string>
     <string name="address">Address</string>
     <string name="email">Email</string>
+    <string name="emp_id">Emp. Id</string>
+    <string name="designation">Designation</string>
     <string name="old_password">Old Password</string>
     <string name="new_password">New Password</string>
     <string name="retype_password">Re-type Password</string>
@@ -36,4 +42,13 @@
     <string name="month_absent">Month Absent Days</string>
     <string name="ac_total_year">Academic Year Total Days</string>
     <string name="ac_absent_year">Academic Year Absent Days</string>
+    <string name="about_us">About Us</string>
+    <string name="faq">FAQ</string>
+
+    <string name="date">Date</string>
+    <string name="session">Session</string>
+    <string name="class_division">Class Division</string>
+    <string name="branch_name">Branch Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="website">WebSite</string>
 </resources>

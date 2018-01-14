@@ -99,35 +99,31 @@ public class Events extends AppCompatActivity {
             @Override
             public void onDayClick(Date dateClicked) {
                 compactcalander.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                try {
-                    SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.ENGLISH);
-                    SimpleDateFormat formatneeded=new SimpleDateFormat("dd/MM/yyyy");
-                    Date date1 = formatnow.parse(dateClicked.toString());
-                    String date2 = formatneeded.format(date1);
-                    currDate.setText(date2);
-                    currDate.setVisibility(View.GONE);
-                    assignmentList.clear();
-                    String indexOfAssignment = getIndexOfArray(date2);
-                    Log.e("indexOfAssignment", String.valueOf(indexOfAssignment));
+                SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.ENGLISH);
+                SimpleDateFormat formatneeded=new SimpleDateFormat("dd/MM/yyyy");
+//                    Date date1 = formatnow.parse(dateClicked.toString());
+                String date2 = formatneeded.format(dateClicked);
+                currDate.setText(date2);
+                currDate.setVisibility(View.GONE);
+                assignmentList.clear();
+                String indexOfAssignment = getIndexOfArray(date2);
+                Log.e("indexOfAssignment", String.valueOf(indexOfAssignment));
 
-                    if (!indexOfAssignment.equalsIgnoreCase("")){
-                        noEvents.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        String splitIndex[] = indexOfAssignment.split("\\|");
-                        Log.e("splitIndex", String.valueOf(splitIndex.length));
-                        setToAdapterString(splitIndex);
-                    }else {
-                        noEvents.setVisibility(View.VISIBLE);
-                        noEvents.setText("No Events Found!");
-                        recyclerView.setVisibility(View.GONE);
-                        EventsModel eventModelss = new EventsModel("","","","", "");
-                        assignmentList.add(eventModelss);
-                        assAdapter.notifyDataSetChanged();
-                    }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                if (!indexOfAssignment.equalsIgnoreCase("")){
+                    noEvents.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    String splitIndex[] = indexOfAssignment.split("\\|");
+                    Log.e("splitIndex", String.valueOf(splitIndex.length));
+                    setToAdapterString(splitIndex);
+                }else {
+                    noEvents.setVisibility(View.VISIBLE);
+                    noEvents.setText("No Events Scheduled!");
+                    recyclerView.setVisibility(View.GONE);
+                    EventsModel eventModelss = new EventsModel("","","","", "");
+                    assignmentList.add(eventModelss);
+                    assAdapter.notifyDataSetChanged();
                 }
+
             }
 
 
@@ -137,6 +133,7 @@ public class Events extends AppCompatActivity {
                 // noEvents.setVisibility(View.VISIBLE);
                 // noEvents.setText("Please click on any of the dates");
                 // recyclerView.setVisibility(View.GONE);
+                compactcalander.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.noColor));
                 currMonth = new SimpleDateFormat("MM").format(firstDayOfNewMonth);
                 currYear = new SimpleDateFormat("yyyy").format(firstDayOfNewMonth);
 //                getEvents(currMonth, currYear);
@@ -208,7 +205,7 @@ public class Events extends AppCompatActivity {
                         assAdapter.notifyDataSetChanged();
                     }else {
                         noEvents.setVisibility(View.VISIBLE);
-                        noEvents.setText("No Events Found!");
+                        noEvents.setText("No Events Scheduled!");
                         recyclerView.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

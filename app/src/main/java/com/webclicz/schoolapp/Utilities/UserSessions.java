@@ -97,6 +97,11 @@ public class UserSessions extends JSONObject {
                 String schoolId = dataObj.getString(KEY_SCHOOL_ID);
                 String StaffID = dataObj.getString(constants.STAFF_ID);
                 String StaffName = dataObj.getString(constants.STAFF_NAME);
+                String empId = dataObj.getString(constants.EMP_ID);
+                String designation = dataObj.getString(constants.DESIGNATION);
+                String address = dataObj.getString(constants.ADDRESS);
+                String cellPhone = dataObj.getString(constants.CELL_PHONE);
+                String email = dataObj.getString(constants.EMAIL);
                 String profileImage = dataObj.getString(KEY_PROFILE_IMAGE);
 
                 editor.putBoolean(IS_USER_LOGIN, true);
@@ -105,6 +110,11 @@ public class UserSessions extends JSONObject {
                 editor.putString(KEY_PROFILE_IMAGE, profileImage);
                 editor.putString(constants.STAFF_NAME, StaffName);
                 editor.putString(constants.STAFF_ID, StaffID);
+                editor.putString(constants.EMP_ID, empId);
+                editor.putString(constants.DESIGNATION, designation);
+                editor.putString(constants.ADDRESS, address);
+                editor.putString(constants.CELL_PHONE, cellPhone);
+                editor.putString(constants.EMAIL, email);
                 editor.commit();
             }
         } catch (JSONException e) {
@@ -147,6 +157,11 @@ public class UserSessions extends JSONObject {
         input.put(KEY_PROFILE_IMAGE, pref.getString(KEY_PROFILE_IMAGE, null));
         input.put(constants.STAFF_NAME, pref.getString(constants.STAFF_NAME, null));
         input.put(constants.STAFF_ID, pref.getString(constants.STAFF_ID, null));
+        input.put(constants.EMP_ID, pref.getString(constants.EMP_ID, null));
+        input.put(constants.DESIGNATION, pref.getString(constants.DESIGNATION, null));
+        input.put(constants.CELL_PHONE, pref.getString(constants.CELL_PHONE, null));
+        input.put(constants.ADDRESS, pref.getString(constants.ADDRESS, null));
+        input.put(constants.EMAIL, pref.getString(constants.EMAIL, null));
 
         JSONObject data = new JSONObject(input);
         return data;

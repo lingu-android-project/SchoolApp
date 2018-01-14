@@ -5,78 +5,131 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context="com.webclicz.schoolapp.Activities.LoginActivity"
-    android:background="@drawable/bg_img"
+    android:background="@drawable/login_page"
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
         android:layout_marginBottom="40dp"
-        android:id="@+id/logo"/>
+        android:id="@+id/logo"
+        android:visibility="gone"/>
+    <ImageView
+        android:layout_width="99dp"
+        android:layout_height="107dp"
+        android:src="@drawable/new_logo"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="-150dp"
+        android:layout_gravity="center"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
-        <ImageView
+        <!--<ImageView
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:src="@mipmap/ic_user_name"
             android:layout_weight="10"
-            android:layout_gravity="right"
+            android:layout_gravity="right"-->
             />
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/user_name"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+
+
+        </LinearLayout>-->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:hint="@string/user_name"
-            android:textColorHint="@color/colorWhite"
             android:id="@+id/userName"
             android:inputType="text"
             android:textColor="@color/colorWhite"
             android:background="@null"
+            android:hint="Email Id"
+            android:textColorHint="@color/colorWhite"
             android:layout_marginTop="8dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/dashed_line"></View>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorWhite"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="15dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp">
-        <ImageView
+        <!--<ImageView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:src="@mipmap/ic_password"
+            android:src="@mipmap/ic_user_name"
             android:layout_weight="10"
-            android:layout_gravity="right"/>
+            android:layout_gravity="right"-->
+            />
+        <!--<TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="@string/password"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="2">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:id="@+id/password"
+                android:textColor="@color/colorWhite"
+                android:background="@null"
+                android:layout_marginTop="8dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/dashed_line"></View>
+        </LinearLayout>-->
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:hint="@string/password"
-            android:textColorHint="@color/colorWhite"
             android:inputType="textPassword"
             android:id="@+id/password"
             android:textColor="@color/colorWhite"
             android:background="@null"
+            android:hint="@string/password"
+            android:textColorHint="@color/colorWhite"
             android:layout_marginTop="8dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/dashed_line"></View>
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorWhite"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"/>
+
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -87,12 +140,12 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@color/new_yellow"
             android:text="@string/login"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:id="@+id/loginButton"/>
-        <TextView
+        <!--<TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/forget_password"
@@ -100,6 +153,6 @@
             android:textStyle="bold"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"/>-->
     </LinearLayout>
 </LinearLayout>

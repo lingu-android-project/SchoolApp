@@ -26,7 +26,7 @@ public class MyProfile extends AppCompatActivity {
     Constants constants;
     String schoolId, userType;
     JSONObject userDetais = new JSONObject();
-    TextView logName, logMblNumber, logEmail, logAddress, logStuName, logStuClass, logStuDic, logStaffName;
+    TextView logName, logMblNumber, logEmail, logAddress, logStuName, logStuClass, logStuDic, logStaffName, logStaffMblNumber, logStaffEmail, logStaffAddress, logStaffEmpId, logStaffDesignation;
     LinearLayout parentSection, studentSection, staffSection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,11 @@ public class MyProfile extends AppCompatActivity {
         logStuClass = (TextView) findViewById(R.id.logStuClass);
         logStuDic = (TextView) findViewById(R.id.logStuDic);
         logStaffName = (TextView) findViewById(R.id.logStaffName);
+        logStaffMblNumber = (TextView) findViewById(R.id.logStaffMblNumber);
+        logStaffEmail = (TextView) findViewById(R.id.logStaffEmail);
+        logStaffAddress = (TextView) findViewById(R.id.logStaffAddress);
+        logStaffEmpId = (TextView) findViewById(R.id.logStaffEmpId);
+        logStaffDesignation = (TextView) findViewById(R.id.logStaffDesignation);
 
         parentSection = (LinearLayout) findViewById(R.id.parentSection);
         studentSection = (LinearLayout) findViewById(R.id.studentSection);
@@ -94,6 +99,11 @@ public class MyProfile extends AppCompatActivity {
 
             try {
                 logStaffName.setText(userDetais.getString(constants.STAFF_NAME));
+                logStaffMblNumber.setText(userDetais.getString(constants.CELL_PHONE));
+                logStaffEmail.setText(userDetais.getString(constants.EMAIL));
+                logStaffAddress.setText(userDetais.getString(constants.ADDRESS));
+                logStaffEmpId.setText(userDetais.getString(constants.EMP_ID));
+                logStaffDesignation.setText(userDetais.getString(constants.DESIGNATION));
                 Picasso.with(MyProfile.this)
                         .load(userDetais.getString(constants.PROFILE_IMAGE))
                         .resize(250, 250)

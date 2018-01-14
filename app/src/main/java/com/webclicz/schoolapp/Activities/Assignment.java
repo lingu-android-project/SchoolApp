@@ -100,56 +100,53 @@ public class Assignment extends AppCompatActivity {
             @Override
             public void onDayClick(Date dateClicked) {
                 compactcalander.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                try {
-                    SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.ENGLISH);
-                    SimpleDateFormat formatneeded=new SimpleDateFormat("dd/MM/yyyy");
-                    Date date1 = formatnow.parse(dateClicked.toString());
-                    String date2 = formatneeded.format(date1);
-                    currDate.setText(date2);
-                    currDate.setVisibility(View.GONE);
-                    assignmentList.clear();
-                    String indexOfAssignment = getIndexOfArray(date2);
-                    Log.e("indexOfAssignment", String.valueOf(indexOfAssignment));
+                SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.ENGLISH);
+                SimpleDateFormat formatneeded=new SimpleDateFormat("dd/MM/yyyy");
+//                    Date date1 = formatnow.parse(dateClicked.toString());
+                String date2 = formatneeded.format(dateClicked);
+                currDate.setText(date2);
+                currDate.setVisibility(View.GONE);
+                assignmentList.clear();
+                String indexOfAssignment = getIndexOfArray(date2);
+                Log.e("indexOfAssignment", String.valueOf(indexOfAssignment));
 
-                    if (!indexOfAssignment.equalsIgnoreCase("")){
-                        noAssignments.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        String splitIndex[] = indexOfAssignment.split("\\|");
-                        Log.e("splitIndex", String.valueOf(splitIndex.length));
-                        for(int i = 0; i < splitIndex.length; i++){
-                            JSONObject res = null;
-                            try {
-                                res = assignData.getJSONObject(Integer.parseInt(splitIndex[i]));
-                                Log.e("res", String.valueOf(res));
-                                Assignments assignModels = new Assignments(res.getString(constants.ASSIGNMENT_ID),
-                                        res.getString(constants.ASSIGNMENT_DATE),
-                                        res.getString(constants.ASSIGNMENT_NAME),
-                                        res.getString(constants.SUBMISSION_DATE));
-                                assignmentList.add(assignModels);
+                if (!indexOfAssignment.equalsIgnoreCase("")){
+                    noAssignments.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    String splitIndex[] = indexOfAssignment.split("\\|");
+                    Log.e("splitIndex", String.valueOf(splitIndex.length));
+                    for(int i = 0; i < splitIndex.length; i++){
+                        JSONObject res = null;
+                        try {
+                            res = assignData.getJSONObject(Integer.parseInt(splitIndex[i]));
+                            Log.e("res", String.valueOf(res));
+                            Assignments assignModels = new Assignments(res.getString(constants.ASSIGNMENT_ID),
+                                    res.getString(constants.ASSIGNMENT_DATE),
+                                    res.getString(constants.ASSIGNMENT_NAME),
+                                    res.getString(constants.SUBMISSION_DATE));
+                            assignmentList.add(assignModels);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        assAdapter.notifyDataSetChanged();
-                    }else {
-                        noAssignments.setVisibility(View.VISIBLE);
-                        noAssignments.setText("No Assignments Found!");
-                        recyclerView.setVisibility(View.GONE);
-                        Assignments assignModels = new Assignments("","","","");
-                        assignmentList.add(assignModels);
-                        assAdapter.notifyDataSetChanged();
                     }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                    assAdapter.notifyDataSetChanged();
+                }else {
+                    noAssignments.setVisibility(View.VISIBLE);
+                    noAssignments.setText("No Assignments scheduled!");
+                    recyclerView.setVisibility(View.GONE);
+                    Assignments assignModels = new Assignments("","","","");
+                    assignmentList.add(assignModels);
+                    assAdapter.notifyDataSetChanged();
                 }
+
             }
             @Override
             public void onMonthScroll(Date firstDayOfNewMonth) {
 //                noAssignments.setVisibility(View.VISIBLE);
 //                noAssignments.setText("Please click on any of the dates");
 //                recyclerView.setVisibility(View.GONE);
+                compactcalander.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.noColor));
                 currMonth = new SimpleDateFormat("MM").format(firstDayOfNewMonth);
                 currYear = new SimpleDateFormat("yyyy").format(firstDayOfNewMonth);
                 getAssignments(currMonth, currYear);
@@ -214,7 +211,7 @@ public class Assignment extends AppCompatActivity {
                         assAdapter.notifyDataSetChanged();
                     }else {
                         noAssignments.setVisibility(View.VISIBLE);
-                        noAssignments.setText("No Exams Found!");
+                        noAssignments.setText("No Assignments scheduled!");
                         recyclerView.setVisibility(View.GONE);
                     }
 

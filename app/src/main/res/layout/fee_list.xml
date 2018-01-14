@@ -81,8 +81,8 @@
             android:layout_marginTop="5dp"/>
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:layout_height="40dp"
+            android:background="@drawable/header_band"
             android:text="View Details"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"/>

@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
-            android:src="@mipmap/ic_down_arrow"
+            android:src="@mipmap/ic_down_arrow_new"
             android:layout_gravity="end"
             android:textAlignment="center"/>
     </LinearLayout>

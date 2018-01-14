@@ -20,7 +20,7 @@
     <group android:checkableBehavior="single">
         <group android:checkableBehavior="single" android:id="@+id/group3">
             <item
-                android:id="@+id/nav_slideshow"
+                android:id="@+id/nav_aboutus"
                 android:icon="@drawable/about_us"
                 android:title="About Us" />
         </group>
@@ -28,7 +28,7 @@
     <group android:checkableBehavior="single">
         <group android:checkableBehavior="single" android:id="@+id/group4">
             <item
-                android:id="@+id/nav_manage"
+                android:id="@+id/nav_faq"
                 android:icon="@drawable/faq"
                 android:title="FAQ" />
         </group>

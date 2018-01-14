@@ -1,5 +1,6 @@
 package com.webclicz.schoolapp;
 
+import android.app.ProgressDialog;
 import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -34,8 +35,10 @@ import com.webclicz.schoolapp.Activities.Examination;
 import com.webclicz.schoolapp.Activities.Fee;
 import com.webclicz.schoolapp.Activities.LoginActivity;
 import com.webclicz.schoolapp.Activities.MyProfile;
+import com.webclicz.schoolapp.Activities.SchoolDetails;
 import com.webclicz.schoolapp.Activities.StaffAttendance;
 import com.webclicz.schoolapp.Activities.TimeTable;
+import com.webclicz.schoolapp.Activities.faq;
 import com.webclicz.schoolapp.Adapters.EventsAdapters;
 import com.webclicz.schoolapp.Adapters.StudentListAdapter;
 import com.webclicz.schoolapp.Models.EventsModel;
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setBackgroundResource(R.color.colorPrimary);
+        navigationView.setBackgroundResource(R.drawable.header_band);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -159,6 +162,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
             });
+
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            recyclerView = (RecyclerView) findViewById(R.id.allStudents);
+                            recyclerView.setHasFixedSize(true);
+                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                            recyclerView.setLayoutManager(mLayoutManager);
+                            recyclerView.setItemAnimator(new DefaultItemAnimator());
+                            recyclerView.setAdapter(stuAdapter);
+
+                            recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+                                @Override
+                                public void onClick(View view, int position) {
+                                    try {
+
+                                        toggle.onDrawerClosed(view);
+                                        holderStudents.setVisibility(View.GONE);
+                                        JSONObject stuObj = studentArray.getJSONObject(position);
+                                        getStudentDetailsByStudentId(stuObj.getString("StudentID"));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onLongClick(View view, int position) {
+
+                                }
+                            }));
+                        }
+                    },
+                    1000);
+
+
         }else if (userType.equalsIgnoreCase(constants.STUDENT)){
             notStaff.setVisibility(View.VISIBLE);
             paymentIcon.setVisibility(View.GONE);
@@ -309,8 +347,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             i = new Intent(MainActivity.this, ChangePassword.class);
             startActivity(i);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_aboutus) {
+            i = new Intent(MainActivity.this, SchoolDetails.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        } else if (id == R.id.nav_faq) {
+            i = new Intent(MainActivity.this, faq.class);
+            startActivity(i);
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         } else if (id == R.id.logout) {
             session.logout();
             i = new Intent(MainActivity.this, LoginActivity.class);
@@ -335,10 +379,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        final ProgressDialog pd = new ProgressDialog(MainActivity.this);
 
         hr.doPost(MainActivity.this, constants.API_STU_DETAILS_BY_PAR, data, new VolleyCallback() {
             @Override
             public void onSuccess(JSONObject result) {
+                pd.dismiss();
                 try {
                     JSONArray studentDetailsArray = result.getJSONArray("data");
                     JSONObject StuDetailsObj = studentDetailsArray.getJSONObject(0);
@@ -356,32 +402,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         arrow = (LinearLayout) findViewById(R.id.arrow);
         studentName = (TextView) findViewById(R.id.studentName);
         studentClassDiv = (TextView) findViewById(R.id.studentClassDiv);
-        recyclerView = (RecyclerView) findViewById(R.id.allStudents);
         ImageView imageView = (ImageView) findViewById(R.id.imageView123);
-
-
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(stuAdapter);
-
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                try {
-                    JSONObject stuObj = studentArray.getJSONObject(position);
-                    getStudentDetailsByStudentId(stuObj.getString("StudentID"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-
-            }
-        }));
 
         try {
             Picasso.with(MainActivity.this)
@@ -434,6 +455,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .transform(new CircleTransform())
                     .into(imageView);
             studentName.setText(userDetais.getString(constants.STAFF_NAME));
+            toolbar.setTitle(userDetais.getString(constants.STAFF_NAME));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

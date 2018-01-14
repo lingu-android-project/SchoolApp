@@ -101,56 +101,52 @@ public class Examination extends AppCompatActivity {
             @Override
             public void onDayClick(Date dateClicked) {
                 compactcalander.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.colorPrimary));
-                try {
-                    SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.ENGLISH);
-                    SimpleDateFormat formatneeded=new SimpleDateFormat("dd/MM/yyyy");
-                    Date date1 = formatnow.parse(dateClicked.toString());
-                    String date2 = formatneeded.format(date1);
-                    currDate.setText(date2);
-                    currDate.setVisibility(View.GONE);
-                    examList.clear();
-                    String indexOfAssignment = getIndexOfArray(date2);
-                    Log.e("indexOfAssignment", String.valueOf(indexOfAssignment));
+                SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZ yyyy", Locale.ENGLISH);
+                SimpleDateFormat formatneeded=new SimpleDateFormat("dd/MM/yyyy");
+//                    Date date1 = formatnow.parse(dateClicked.toString());
+                String date2 = formatneeded.format(dateClicked);
+                currDate.setText(date2);
+                currDate.setVisibility(View.GONE);
+                examList.clear();
+                String indexOfAssignment = getIndexOfArray(date2);
+                Log.e("indexOfAssignment", String.valueOf(indexOfAssignment));
 
-                    if (!indexOfAssignment.equalsIgnoreCase("")){
-                        noExams.setVisibility(View.GONE);
-                        recyclerView.setVisibility(View.VISIBLE);
-                        String splitIndex[] = indexOfAssignment.split("\\|");
-                        Log.e("splitIndex", String.valueOf(splitIndex.length));
-                        for(int i = 0; i < splitIndex.length; i++){
-                            JSONObject res = null;
-                            try {
-                                res = assignData.getJSONObject(Integer.parseInt(splitIndex[i]));
-                                Log.e("res", String.valueOf(res));
-                                Examinations assignModels = new Examinations(res.getString(constants.ACEDAMIC_YEAR_ID),
-                                        res.getString(constants.CLASS),
-                                        res.getString(constants.EXAM_NAME),
-                                        res.getString(constants.SUBJECT_NAME),
-                                        res.getString(constants.EXAM_DATE),
-                                        res.getString(constants.START_TIME),
-                                        res.getString(constants.END_TIME),
-                                        res.getString(constants.SUPERVISOR),
-                                        res.getString(constants.SYLLABUS)
-                                );
-                                examList.add(assignModels);
+                if (!indexOfAssignment.equalsIgnoreCase("")){
+                    noExams.setVisibility(View.GONE);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    String splitIndex[] = indexOfAssignment.split("\\|");
+                    Log.e("splitIndex", String.valueOf(splitIndex.length));
+                    for(int i = 0; i < splitIndex.length; i++){
+                        JSONObject res = null;
+                        try {
+                            res = assignData.getJSONObject(Integer.parseInt(splitIndex[i]));
+                            Log.e("res", String.valueOf(res));
+                            Examinations assignModels = new Examinations(res.getString(constants.ACEDAMIC_YEAR_ID),
+                                    res.getString(constants.CLASS),
+                                    res.getString(constants.EXAM_NAME),
+                                    res.getString(constants.SUBJECT_NAME),
+                                    res.getString(constants.EXAM_DATE),
+                                    res.getString(constants.START_TIME),
+                                    res.getString(constants.END_TIME),
+                                    res.getString(constants.SUPERVISOR),
+                                    res.getString(constants.SYLLABUS)
+                            );
+                            examList.add(assignModels);
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        assAdapter.notifyDataSetChanged();
-                    }else {
-                        noExams.setVisibility(View.VISIBLE);
-                        noExams.setText("No Exams Found!");
-                        recyclerView.setVisibility(View.GONE);
-                        Examinations assignModels = new Examinations("","","","","","","","","");
-                        examList.add(assignModels);
-                        assAdapter.notifyDataSetChanged();
                     }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                    assAdapter.notifyDataSetChanged();
+                }else {
+                    noExams.setVisibility(View.VISIBLE);
+                    noExams.setText("No Examamination Scheduled!");
+                    recyclerView.setVisibility(View.GONE);
+                    Examinations assignModels = new Examinations("","","","","","","","","");
+                    examList.add(assignModels);
+                    assAdapter.notifyDataSetChanged();
                 }
+
             }
 
             @Override
@@ -158,6 +154,7 @@ public class Examination extends AppCompatActivity {
 //                noExams.setVisibility(View.VISIBLE);
 //                noExams.setText("Please click on any of the dates");
 //                recyclerView.setVisibility(View.GONE);
+                compactcalander.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.noColor));
                 currMonth = new SimpleDateFormat("MM").format(firstDayOfNewMonth);
                 currYear = new SimpleDateFormat("yyyy").format(firstDayOfNewMonth);
 //                getExaminations(currMonth, currYear);
@@ -217,7 +214,7 @@ public class Examination extends AppCompatActivity {
                         assAdapter.notifyDataSetChanged();
                     }else {
                         noExams.setVisibility(View.VISIBLE);
-                        noExams.setText("No Exams Found!");
+                        noExams.setText("No Examamination Scheduled!");
                         recyclerView.setVisibility(View.GONE);
                     }
                 } catch (JSONException e) {

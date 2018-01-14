@@ -23,12 +23,16 @@ public class HttpRequest {
     ProgressDialog pd;
     public void doPost(final Context con, String apiUrl, JSONObject input, final VolleyCallback volleyCallback){
         RequestQueue queue = Volley.newRequestQueue(con);
-
+        pd = new ProgressDialog(con);
+        pd.setMessage("Loading..");
+        pd.show();
+        Log.e("count", "count");
         JsonObjectRequest request = new JsonObjectRequest(
             Request.Method.POST, apiUrl, input,
             new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject jsonObj) {
+                    pd.dismiss();
                     if (jsonObj != null) {
                         volleyCallback.onSuccess(jsonObj);
                     }
@@ -38,6 +42,7 @@ public class HttpRequest {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.e("err", error.toString());
+                    pd.dismiss();
                 }
         });
         queue.add(request);
